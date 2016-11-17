@@ -29,11 +29,11 @@ namespace OfficaialDocument_2
 
         }
 
-        public void menuRecord_Click(object sender, EventArgs e)
-        {
-            Save f = new Save(this);
-            f.Show(this);
-        }
+        //public void menuRecord_Click(object sender, EventArgs e)
+        //{
+        //    Save f = new Save(this);
+        //    f.ShowDialog();
+        //}
 
         private void menuReport_Click(object sender, EventArgs e)
         {
@@ -51,20 +51,25 @@ namespace OfficaialDocument_2
 
                 if (cbDateBook.Checked == true)
                 {
-                    string dateBook = datePick.Value.ToString("yyyy-MM-dd", new CultureInfo("en-us"));
+                    string dateBook = datePick.Value.ToString("dd MMM yy", new CultureInfo("th-TH"));
                     sql += " AND ad.AcceptDate = '" + dateBook + "'";
                 }
-                if (cbDateBook.Checked == true)
+                if (cbRecieve.Checked == true)
                 {
                     string dateRecieve = datePickRecieve.Value.ToString("yyyy-MM-dd", new CultureInfo("en-us"));
                     sql += " AND ad.RecieveDate = '" + dateRecieve + "'";
                 }
+               
+                if(comboBox1.Text != "ทั้งหมด")
+                {
+                    sql += " AND ad.type = '" + comboBox1.Text + "'";
+                }
                 qry = "SELECT  *  FROM AcceptDocudemt ad where ad.DocNo LIKE '%" + tbDocNo.Text + "%' AND ad.DocNo_rtn LIKE '%" + tbDocNo_rtn.Text + "%' AND ad.From_ LIKE '%" + cbbFrom.Text + "%' AND ad.To_ LIKE '%" + cbbTo.Text + "%' AND ad.Subject_ LIKE '%" + tbSubject.Text + "%' AND ad.Recipient LIKE '%" + cbbRecipient.Text + "%'";
                 qry += sql;
             }
-            w.Hide();
+            w.Close();
             Report f = new Report(this, qry);
-            f.Show(this);
+            f.ShowDialog();
         }
 
         private void printBtn_Click(object sender, EventArgs e)
@@ -83,20 +88,25 @@ namespace OfficaialDocument_2
 
                 if (cbDateBook.Checked == true)
                 {
-                    string dateBook = datePick.Value.ToString("yyyy-MM-dd", new CultureInfo("en-us"));
-                    sql += " AND ad.AcceptDate = '" + dateBook + "'";
+                    string dateBook = datePick.Value.ToString("dd MMM yy", new CultureInfo("th-TH"));
+                    sql += " AND ad.AcceptDate = '" + dateBook + "' ";
                 }
-                if (cbDateBook.Checked == true)
+                if (cbRecieve.Checked == true)
                 {
                     string dateRecieve = datePickRecieve.Value.ToString("yyyy-MM-dd", new CultureInfo("en-us"));
-                    sql += " AND ad.RecieveDate = '" + dateRecieve + "'";
+                    sql += " AND ad.RecieveDate = '" + dateRecieve + "' ";
                 }
-                qry = "SELECT  * FROM AcceptDocudemt ad where ad.DocNo LIKE '%" + tbDocNo.Text + "%' AND ad.DocNo_rtn LIKE '%" + tbDocNo_rtn.Text + "%' AND ad.From_ LIKE '%" + cbbFrom.Text + "%' AND ad.To_ LIKE '%" + cbbTo.Text + "%' AND ad.Subject_ LIKE '%" + tbSubject.Text + "%' AND ad.Recipient LIKE '%" + cbbRecipient.Text + "%'";
+
+                if (comboBox1.Text != "ทั้งหมด")
+                {
+                    sql += " AND ad.type = '" + comboBox1.Text + "' ";
+                }
+                qry = "SELECT  *  FROM AcceptDocudemt ad where ad.DocNo LIKE '%" + tbDocNo.Text + "%' AND ad.DocNo_rtn LIKE '%" + tbDocNo_rtn.Text + "%' AND ad.From_ LIKE '%" + cbbFrom.Text + "%' AND ad.To_ LIKE '%" + cbbTo.Text + "%' AND ad.Subject_ LIKE '%" + tbSubject.Text + "%' AND ad.Recipient LIKE '%" + cbbRecipient.Text + "%'";
                 qry += sql;
             }
-            w.Hide();
+            w.Close();
             Report f = new Report(this, qry);
-            f.Show(this);
+            f.ShowDialog();
         }
 
         private void editBtn_Click(object sender, EventArgs e)
@@ -104,7 +114,7 @@ namespace OfficaialDocument_2
             string id = dataGridView1.SelectedRows[0].Cells[11].Value.ToString();
             Edit f = new Edit(this, id);
 
-            f.Show(this);
+            f.ShowDialog();
         }
 
         private void deleteBtn_Click(object sender, EventArgs e)
@@ -124,14 +134,14 @@ namespace OfficaialDocument_2
                     MySqlCommand comm = conn.CreateCommand();
                     comm.CommandText = "DELETE FROM acceptdocudemt where id = '" + dataGridView1.SelectedRows[0].Cells[6].Value.ToString() + "'";
                     comm.ExecuteNonQuery();
-                    w.Hide();
+                    w.Close();
                     MessageBox.Show("ลบสำเร็จ...");
                     getData();
                 }
                 catch
                 {
                     conn.Close();
-                    w.Hide();
+                    w.Close();
                 }
                 conn.Close();
             }
@@ -164,6 +174,7 @@ namespace OfficaialDocument_2
 
         private void Search_Load(object sender, EventArgs e)
         {
+            comboBox1.SelectedItem = "ทั้งหมด";
             string constr = @"SERVER=navyserver;DATABASE=navdb;UID=root;";
             MySqlConnection con = new MySqlConnection(constr);
             con.Open();
@@ -225,22 +236,32 @@ namespace OfficaialDocument_2
 
             }
             con.Close();
-            getData();
+            //getData();
         }
 
         public void getData()
         {
             waiting w = new waiting();
             w.Show(this);
+            string qryOther = "";
+            
             if (cbs.Checked == true)
             {
+                if (comboBox1.Text == "กพ.")
+                {
+                    qryOther += "where ad.type = 'กพ.'";
+                }
+                else if(comboBox1.Text == "คป.")
+                {
+                    qryOther += "where ad.type = 'คป.'";
+                }
                 string constr = @"SERVER=navyserver;DATABASE=navdb;UID=root;";
                 MySqlConnection con = new MySqlConnection(constr);
                 con.Open();
                 try
                 {
                     MySqlCommand cmd = con.CreateCommand();
-                    cmd.CommandText = "SELECT * FROM AcceptDocudemt ad";
+                    cmd.CommandText = "SELECT * FROM AcceptDocudemt ad" + qryOther;
                     DataTable dataTable = new DataTable();
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                     da.Fill(dataTable);
@@ -257,17 +278,26 @@ namespace OfficaialDocument_2
                     dataGridView1.Columns[9].HeaderText = "วันที่บันทึก";
                     dataGridView1.Columns[10].HeaderText = "หมายเหตุ";
                     dataGridView1.Columns[11].Visible = false;
-                    w.Hide();
+                    dataGridView1.Columns[12].HeaderText = "หน่วยงาน";
+                    w.Close();
                 }
                 catch
                 {
-                    w.Hide();
+                    w.Close();
                     con.Close();
                 }
                 con.Close();
             }
             else
             {
+                if (comboBox1.Text == "กพ.")
+                {
+                    qryOther += " and ad.type = 'กพ.'";
+                }
+                else if (comboBox1.Text == "คป.")
+                {
+                    qryOther += " and ad.type = 'คป.'";
+                }
                 string constr = @"SERVER=navyserver;DATABASE=navdb;UID=root;";
                 MySqlConnection con = new MySqlConnection(constr);
                 con.Open();
@@ -276,13 +306,13 @@ namespace OfficaialDocument_2
                     string allSql = "SELECT * FROM AcceptDocudemt ad where ad.DocNo LIKE '%" + tbDocNo.Text + "%' " +
                     " AND ad.From_ LIKE '%" + cbbFrom.Text + "%' AND ad.Subject_ LIKE '%" + tbSubject.Text + "%' " +
                    " AND ad.DocNo_rtn LIKE '%" + tbDocNo_rtn.Text + "%'  AND ad.Recipient LIKE '%" + cbbRecipient.Text + "%'" +
-                   " AND ad.To_ LIKE '%" + cbbTo.Text + "%' ";
+                   " AND ad.To_ LIKE '%" + cbbTo.Text + "%' " + qryOther;
                     string sql = "";
 
 
                     if (cbDateBook.Checked == true)
                     {
-                        string dateBook = datePick.Value.ToString("yyyy-MM-dd", new CultureInfo("en-us"));
+                        string dateBook = datePick.Value.ToString("dd MMM yy", new CultureInfo("th-TH"));
                         sql += " AND ad.AcceptDate = '" + dateBook + "'";
                     }
                     if (cbRecieve.Checked == true)
@@ -310,16 +340,29 @@ namespace OfficaialDocument_2
                     dataGridView1.Columns[9].HeaderText = "วันที่บันทึก";
                     dataGridView1.Columns[10].HeaderText = "หมายเหตุ";
                     dataGridView1.Columns[11].Visible = false;
-                    w.Hide();
+                    dataGridView1.Columns[12].HeaderText = "หน่วยงาน";
+                    w.Close();
                 }
                 catch
                 {
-                    w.Hide();
+                    w.Close();
                     con.Close();
                 }
                 
                 con.Close();
             }
+        }
+
+        private void MenuItemGP_Click(object sender, EventArgs e)
+        {
+            Save f = new Save(this,"กพ.");
+            f.ShowDialog();
+        }
+
+        private void MenuItemKP_Click(object sender, EventArgs e)
+        {
+            Save f = new Save(this, "คป.");
+            f.ShowDialog();
         }
         
 

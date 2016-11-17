@@ -12,25 +12,19 @@ using System.Windows.Forms;
 
 namespace OfficaialDocument_2
 {
-    public partial class Save : Form
+    public partial class SaveKP : Form
     {
-        Search _callerForm;
-        string _type = "";
-        public Save(Search callingForm,string type)
+        public SaveKP()
         {
             InitializeComponent();
-            _type = type;
+        }
+
+        Search _callerForm;
+        public SaveKP(Search callingForm)
+        {
+            InitializeComponent();
             //_callerForm = callingForm;
             //_callerForm.Enabled = false;
-            if(_type == "กพ.")
-            {
-                label1.Text = "เลขทะเบียน กพ.";
-            }
-            else if (_type == "คป.")
-            {
-                label1.Text = "เลขทะเบียน คป.";
-            }
-            
         }
 
         private void Save_FormClosed(object sender, FormClosedEventArgs e)
@@ -70,7 +64,7 @@ VALUES (@DocNo,@No,@AcceptDate,@From,@To,@Subject,@DocNo_rtn,@RecieveDate,@Recip
                 comm.Parameters.AddWithValue("@Recipient", cbbRecipient.Text);
                 comm.Parameters.AddWithValue("@RecordDate", datePickRecordDate.Value.ToString("yyyy-MM-dd", new CultureInfo("en-us")));
                 comm.Parameters.AddWithValue("@note", tbNote.Text);
-                comm.Parameters.AddWithValue("@type", _type);
+                comm.Parameters.AddWithValue("@type", "คป.");
                 comm.ExecuteNonQuery();
                 w.Close();
                 MessageBox.Show("บันทึกสำเร็จ...");
@@ -86,7 +80,7 @@ VALUES (@DocNo,@No,@AcceptDate,@From,@To,@Subject,@DocNo_rtn,@RecieveDate,@Recip
             init();
         }
 
-        private void Save_Load(object sender, EventArgs e)
+        private void SaveKP_Load(object sender, EventArgs e)
         {
             init();
         }
@@ -103,7 +97,7 @@ VALUES (@DocNo,@No,@AcceptDate,@From,@To,@Subject,@DocNo_rtn,@RecieveDate,@Recip
             try
             {
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT Max(DocNo) +1  AS DocNo FROM AcceptDocudemt ad where ad.type = '"+_type+"'";
+                cmd.CommandText = "SELECT Max(DocNo) +1  AS DocNo FROM AcceptDocudemt ad where ad.type = 'คป.'";
                 MySqlDataReader rd = cmd.ExecuteReader();
                 tbDocNo.Text = "";
                 if (rd.Read())
@@ -189,8 +183,6 @@ VALUES (@DocNo,@No,@AcceptDate,@From,@To,@Subject,@DocNo_rtn,@RecieveDate,@Recip
             }
         }
 
-        
-
         private string LeaveOnlyNumbers(String inString)
         {
             String tmp = inString;
@@ -209,6 +201,29 @@ VALUES (@DocNo,@No,@AcceptDate,@From,@To,@Subject,@DocNo_rtn,@RecieveDate,@Recip
             return (c >= '0' && c <= '9');
         }
 
+        private void tbDocNo_rtn_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tbDocNo_TextChanged(object sender, EventArgs e)
+        {
+            tbDocNo.Text = LeaveOnlyNumbers(tbDocNo.Text);
+        }
+
+        private void tbDocNo_rtn_TextChanged(object sender, EventArgs e)
+        {
+            tbDocNo_rtn.Text = LeaveOnlyNumbers(tbDocNo_rtn.Text);
+        }
 
         private void tbDocNo_KeyPress_1(object sender, KeyPressEventArgs e)
         {
@@ -224,29 +239,10 @@ VALUES (@DocNo,@No,@AcceptDate,@From,@To,@Subject,@DocNo_rtn,@RecieveDate,@Recip
             }
         }
 
-        private void tbDocNo_rtn_KeyPress(object sender, KeyPressEventArgs e)
+        private void SaveKP_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-
-            // only allow one decimal point
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
-            }
+            //_callerForm.Enabled = true;
+            this.Close();
         }
-
-        private void tbDocNo_TextChanged_1(object sender, EventArgs e)
-        {
-            tbDocNo.Text = LeaveOnlyNumbers(tbDocNo.Text);
-        }
-
-        private void tbDocNo_rtn_TextChanged_1(object sender, EventArgs e)
-        {
-            tbDocNo_rtn.Text = LeaveOnlyNumbers(tbDocNo_rtn.Text);
-        }
-
     }
 }

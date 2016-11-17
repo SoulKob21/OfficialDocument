@@ -32,7 +32,7 @@ namespace OfficaialDocument_2
         private void Edit_FormClosed(object sender, FormClosedEventArgs e)
         {
             _callerForm.Enabled = true;
-            this.Hide();
+            this.Close();
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
@@ -62,25 +62,25 @@ DocNo_rtn=@DocNo_rtn,RecieveDate=@RecieveDate,Recipient=@Recipient,RecordDate=@R
                 comm.Parameters.AddWithValue("@RecordDate", datePickRecordDate.Value.ToString("yyyy-MM-dd", new CultureInfo("en-us")));
                 comm.Parameters.AddWithValue("@note", tbNote.Text);
                 comm.ExecuteNonQuery();
-                w.Hide();
+                w.Close();
                 MessageBox.Show("บันทึกสำเร็จ...");
 
             }
             catch
             {
-                w.Hide();
+                w.Close();
                 conn.Close();
             }
              
             conn.Close();
             _callerForm.Enabled = true;
-            this.Hide();
+            this.Close();
         }
 
         private void backBtn_Click(object sender, EventArgs e)
         {
             _callerForm.Enabled = true;
-            this.Hide();
+            this.Close();
         }
 
         private void Edit_Load(object sender, EventArgs e)

@@ -33,6 +33,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.cbRecieve = new System.Windows.Forms.CheckBox();
             this.cbDateBook = new System.Windows.Forms.CheckBox();
             this.datePickRecieve = new System.Windows.Forms.DateTimePicker();
@@ -57,10 +59,14 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.menuRecord = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemGP = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemKP = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReport = new System.Windows.Forms.ToolStripMenuItem();
             this.editBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.printBtn = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -71,9 +77,9 @@
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(0, 111);
+            this.groupBox2.Location = new System.Drawing.Point(0, 136);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(987, 408);
+            this.groupBox2.Size = new System.Drawing.Size(987, 383);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "รายการเอกสาร";
@@ -94,12 +100,16 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(987, 383);
+            this.dataGridView1.Size = new System.Drawing.Size(987, 364);
             this.dataGridView1.TabIndex = 2;
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.LightCyan;
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.cbRecieve);
             this.groupBox1.Controls.Add(this.cbDateBook);
             this.groupBox1.Controls.Add(this.datePickRecieve);
@@ -124,11 +134,33 @@
             this.groupBox1.Location = new System.Drawing.Point(0, 30);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(987, 78);
+            this.groupBox1.Size = new System.Drawing.Size(987, 107);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Tag = "1";
             this.groupBox1.Text = "ค้นหาเอกสาร";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Items.AddRange(new object[] {
+            "ทั้งหมด",
+            "กพ.",
+            "คป."});
+            this.comboBox1.Location = new System.Drawing.Point(98, 14);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(96, 21);
+            this.comboBox1.TabIndex = 1;
+            this.comboBox1.Tag = "";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "หน่วยงาน";
             // 
             // cbRecieve
             // 
@@ -192,7 +224,7 @@
             this.cbbTo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cbbTo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbbTo.FormattingEnabled = true;
-            this.cbbTo.Location = new System.Drawing.Point(234, 46);
+            this.cbbTo.Location = new System.Drawing.Point(228, 77);
             this.cbbTo.Name = "cbbTo";
             this.cbbTo.Size = new System.Drawing.Size(154, 21);
             this.cbbTo.TabIndex = 13;
@@ -200,7 +232,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(209, 49);
+            this.label5.Location = new System.Drawing.Point(203, 80);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(19, 13);
             this.label5.TabIndex = 14;
@@ -211,7 +243,7 @@
             this.cbbFrom.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cbbFrom.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbbFrom.FormattingEnabled = true;
-            this.cbbFrom.Location = new System.Drawing.Point(234, 13);
+            this.cbbFrom.Location = new System.Drawing.Point(228, 44);
             this.cbbFrom.Name = "cbbFrom";
             this.cbbFrom.Size = new System.Drawing.Size(154, 21);
             this.cbbFrom.TabIndex = 3;
@@ -236,7 +268,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(203, 19);
+            this.label7.Location = new System.Drawing.Point(197, 50);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(25, 13);
             this.label7.TabIndex = 10;
@@ -245,7 +277,7 @@
             // cbs
             // 
             this.cbs.AutoSize = true;
-            this.cbs.Location = new System.Drawing.Point(814, 31);
+            this.cbs.Location = new System.Drawing.Point(814, 49);
             this.cbs.Name = "cbs";
             this.cbs.Size = new System.Drawing.Size(86, 17);
             this.cbs.TabIndex = 6;
@@ -257,7 +289,7 @@
             this.searchBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.searchBtn.ImageKey = "search-icon2.png";
             this.searchBtn.ImageList = this.imageList1;
-            this.searchBtn.Location = new System.Drawing.Point(906, 12);
+            this.searchBtn.Location = new System.Drawing.Point(906, 27);
             this.searchBtn.Name = "searchBtn";
             this.searchBtn.Size = new System.Drawing.Size(75, 52);
             this.searchBtn.TabIndex = 7;
@@ -294,7 +326,7 @@
             // 
             // tbDocNo_rtn
             // 
-            this.tbDocNo_rtn.Location = new System.Drawing.Point(98, 46);
+            this.tbDocNo_rtn.Location = new System.Drawing.Point(98, 76);
             this.tbDocNo_rtn.MaxLength = 5;
             this.tbDocNo_rtn.Name = "tbDocNo_rtn";
             this.tbDocNo_rtn.Size = new System.Drawing.Size(96, 20);
@@ -303,7 +335,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 49);
+            this.label2.Location = new System.Drawing.Point(12, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 13);
             this.label2.TabIndex = 2;
@@ -311,7 +343,7 @@
             // 
             // tbDocNo
             // 
-            this.tbDocNo.Location = new System.Drawing.Point(98, 16);
+            this.tbDocNo.Location = new System.Drawing.Point(98, 46);
             this.tbDocNo.MaxLength = 5;
             this.tbDocNo.Name = "tbDocNo";
             this.tbDocNo.Size = new System.Drawing.Size(96, 20);
@@ -320,11 +352,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 19);
+            this.label1.Location = new System.Drawing.Point(12, 49);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ทะเบียนรับ กพ.";
+            this.label1.Text = "ทะเบียนรับ";
             // 
             // menuStrip1
             // 
@@ -347,10 +379,26 @@
             // 
             // menuRecord
             // 
+            this.menuRecord.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemGP,
+            this.MenuItemKP});
             this.menuRecord.Name = "menuRecord";
             this.menuRecord.Size = new System.Drawing.Size(63, 20);
             this.menuRecord.Text = "เพิ่มข้อมูล";
-            this.menuRecord.Click += new System.EventHandler(this.menuRecord_Click);
+            // 
+            // MenuItemGP
+            // 
+            this.MenuItemGP.Name = "MenuItemGP";
+            this.MenuItemGP.Size = new System.Drawing.Size(129, 22);
+            this.MenuItemGP.Text = "ทะเบียน กพ.";
+            this.MenuItemGP.Click += new System.EventHandler(this.MenuItemGP_Click);
+            // 
+            // MenuItemKP
+            // 
+            this.MenuItemKP.Name = "MenuItemKP";
+            this.MenuItemKP.Size = new System.Drawing.Size(129, 22);
+            this.MenuItemKP.Text = "ทะเบียน คป.";
+            this.MenuItemKP.Click += new System.EventHandler(this.MenuItemKP_Click);
             // 
             // menuReport
             // 
@@ -410,6 +458,23 @@
             this.printBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.printBtn.UseVisualStyleBackColor = true;
             this.printBtn.Click += new System.EventHandler(this.printBtn_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(228, 13);
+            this.textBox1.MaxLength = 5;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(154, 20);
+            this.textBox1.TabIndex = 23;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(203, 16);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(14, 13);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "ที่";
             // 
             // Search
             // 
@@ -471,5 +536,11 @@
         private System.Windows.Forms.Button editBtn;
         private System.Windows.Forms.Button deleteBtn;
         private System.Windows.Forms.Button printBtn;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemGP;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemKP;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label9;
     }
 }

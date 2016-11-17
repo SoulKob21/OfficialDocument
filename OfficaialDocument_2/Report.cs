@@ -21,8 +21,8 @@ namespace OfficaialDocument_2
         {
             InitializeComponent();
             strQuery = _strQuery;
-            _callerForm = callingForm;
-            _callerForm.Enabled = false;
+            //_callerForm = callingForm;
+            //_callerForm.Enabled = false;
         }
 
         private void Report_Load(object sender, EventArgs e)
@@ -70,8 +70,8 @@ namespace OfficaialDocument_2
 
         private void Report_FormClosed_1(object sender, FormClosedEventArgs e)
         {
-            _callerForm.Enabled = true;
-            this.Hide();
+            //_callerForm.Enabled = true;
+            this.Close();
         }
     }
 }

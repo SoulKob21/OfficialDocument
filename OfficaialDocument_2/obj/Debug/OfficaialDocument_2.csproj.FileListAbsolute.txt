@@ -9,6 +9,7 @@ C:\VSProject\OfficaialDocument_2\OfficaialDocument_2\obj\Debug\OfficaialDocument
 C:\VSProject\OfficaialDocument_2\OfficaialDocument_2\obj\Debug\OfficaialDocument_2.Properties.Resources.resources
 C:\VSProject\OfficaialDocument_2\OfficaialDocument_2\obj\Debug\OfficaialDocument_2.Report.resources
 C:\VSProject\OfficaialDocument_2\OfficaialDocument_2\obj\Debug\OfficaialDocument_2.Save.resources
+C:\VSProject\OfficaialDocument_2\OfficaialDocument_2\obj\Debug\OfficaialDocument_2.SaveKP.resources
 C:\VSProject\OfficaialDocument_2\OfficaialDocument_2\obj\Debug\OfficaialDocument_2.Search.resources
 C:\VSProject\OfficaialDocument_2\OfficaialDocument_2\obj\Debug\OfficaialDocument_2.waiting.resources
 C:\VSProject\OfficaialDocument_2\OfficaialDocument_2\obj\Debug\OfficaialDocument_2.csproj.GenerateResource.Cache
@@ -16,4 +17,3 @@ C:\VSProject\OfficaialDocument_2\OfficaialDocument_2\obj\Debug\RdlCompile.cache
 C:\VSProject\OfficaialDocument_2\OfficaialDocument_2\obj\Debug\RdlCompile.compiled
 C:\VSProject\OfficaialDocument_2\OfficaialDocument_2\obj\Debug\OfficaialDocument_2.exe
 C:\VSProject\OfficaialDocument_2\OfficaialDocument_2\obj\Debug\OfficaialDocument_2.pdb
-C:\VSProject\OfficaialDocument_2\OfficaialDocument_2\obj\Debug\OfficaialDocument_2.csprojResolveAssemblyReference.cache
